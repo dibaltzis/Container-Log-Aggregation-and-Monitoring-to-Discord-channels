@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  discord-logger:
+    build: .
+    container_name: discord-logger
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      DISCORD_TOKEN: "${DISCORD_TOKEN}"
+      GUILD_ID: "${GUILD_ID}"
+      CATEGORY_NAME: "containers-logs"
+      DOCKER_SOCKET: "unix:///var/run/docker.sock"

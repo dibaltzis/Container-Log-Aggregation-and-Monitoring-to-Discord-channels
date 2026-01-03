@@ -1,0 +1,4 @@
+tokens.ini
+*.pyc
+__pycache__/
+.env
