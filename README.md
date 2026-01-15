@@ -113,6 +113,15 @@ The included `docker-compose.yml` mounts the Docker socket to allow the containe
 - `docker_side.py`: Handles Docker container monitoring and log streaming
 - `discord_side.py`: Manages Discord bot, channel creation, and message sending
 
+## CI/CD Pipeline
+
+The project uses Jenkins for continuous integration and deployment:
+
+- **Trigger**: Gitea webhook triggers Jenkins pipeline on every commit
+- **Build**: Multi-architecture Docker images are built using the build script
+- **Registry**: Images are pushed to a local Docker registry
+- **Deployment**: Watchtower monitors the registry and automatically pulls the latest image, completing the deployment cycle
+
 ## Troubleshooting
 
 ### Common Issues
