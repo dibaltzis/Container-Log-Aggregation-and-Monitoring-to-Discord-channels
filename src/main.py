@@ -13,6 +13,9 @@ if __name__ == "__main__":
     guild_id = int(os.getenv("GUILD_ID", "0"))
     docker_socket = os.getenv("DOCKER_SOCKET", "unix:///var/run/docker.sock").strip('"')
     category_name = os.getenv("CATEGORY_NAME", "containers-logs")
+    app_version = os.getenv("APP_VERSION", "unknown")
+    print(f"Starting Docker-Discord Logger v{app_version}...")
+
 
     if not discord_token or not guild_id:
         print("[ERROR] Missing environment variables DISCORD_TOKEN or DISCORD_GUILD_ID")
