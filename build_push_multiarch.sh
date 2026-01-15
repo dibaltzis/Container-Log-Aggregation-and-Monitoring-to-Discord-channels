@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-REGISTRY_IP="192.168.31.229:5444"
-IMAGE="docker-logger"
+REGISTRY_IP="${REGISTRY:-192.168.31.229:5444}"
+IMAGE="${IMAGE:-docker_logger}"
 VERSION=$(git rev-parse --short=6 HEAD)
 PLATFORMS="linux/amd64,linux/arm64"
 
@@ -29,9 +29,10 @@ echo "✅ Multi-arch image pushed successfully"
 digest=$(docker buildx imagetools inspect ${REGISTRY_IP}/${IMAGE}:${VERSION} 2>/dev/null | grep "Digest:" | awk '{print $2}' || echo "unknown")
 printf "| %-17s %-30s |\n" "Digest:" "$digest"
 
-echo "Cleaning up dangling images..."
-docker builder prune -f
+#echo "Cleaning up dangling images..."
+#docker builder prune -f
 
+docker buildx prune --builder multiarch-builder -f
 echo "===================================================="
 echo "|           ✅ Docker Build Summary                |"
 echo "===================================================="
